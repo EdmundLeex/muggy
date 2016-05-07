@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -34,6 +35,9 @@ gem 'utf8-cleaner'
 
 # square payment gem
 gem 'square_connect'
+
+gem 'figaro'
+gem 'rollbar'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
