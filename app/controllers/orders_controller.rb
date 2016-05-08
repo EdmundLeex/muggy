@@ -7,20 +7,6 @@ class OrdersController < ApplicationController
     if order.save
     else
     end
-
-    # The SDK throws an exception if a Connect endpoint responds with anything besides 200 (success).
-    # This block catches any exceptions that occur from the request.
-    locationApi = SquareConnect::LocationApi.new()
-    locations = locationApi.list_locations(Rails.application.secrets.square_access_token)
-    begin
-      resp = transaction_api.charge(Rails.application.secrets.square_access_token, locations.locations[0].id, request_body)
-    rescue SquareConnect::ApiError => e
-      puts 'Error encountered while charging card:'
-      puts e.message
-      render json: {:status => 400, :errors => JSON.parse(e.response_body)["errors"]  }
-      return
-    end
-    puts resp
     
     data = {
       amount: amount, 

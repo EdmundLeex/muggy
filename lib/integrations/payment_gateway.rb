@@ -33,19 +33,6 @@ class PaymentGateway
     self.status = PENDING
     resp = TransactionApi.charge(ENV['square_access_token'], Locations.locations[0].id, payload)
     self.status = COMPLETED
-    # data = {
-    #   amount: amount, 
-    #   user: {
-    #     name: params[:name], 
-    #     street_address_1: params[:street_address_1], 
-    #     street_address_2: params[:street_address_2], 
-    #     state: params[:state],
-    #     zip: params[:zip],
-    #     city: params[:city]  
-    #   },
-    #   card: resp.transaction.tenders[0].card_details.card
-    # }
-    # ReceiptMailer.charge_email(params[:email],data).deliver_now if Rails.env == "development"
   rescue SquareConnect::ApiError => e
     # TODO: should only retry when timeout
     retry if @retry < 3
