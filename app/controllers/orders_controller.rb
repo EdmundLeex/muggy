@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
   def create
     user = User.find_or_create_by(email: user_params[:email])
-    user.update(first_name: user_params[:first_name], last_name: user_params[:last_name])
+    user.update!(user_params)
+
+    order = user.orders.new(order_params)
 
     # The SDK throws an exception if a Connect endpoint responds with anything besides 200 (success).
     # This block catches any exceptions that occur from the request.
@@ -34,5 +36,11 @@ class OrdersController < ApplicationController
     ReceiptMailer.charge_email(params[:email],data).deliver_now if Rails.env == "development"
     
     render json: {:status => 200}
+  end
+
+  private
+
+  def user_params
+    
   end
 end
