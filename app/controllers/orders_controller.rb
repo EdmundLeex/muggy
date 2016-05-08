@@ -4,6 +4,9 @@ class OrdersController < ApplicationController
     user.update!(user_params)
 
     order = user.orders.new(order_params)
+    if order.save
+    else
+    end
 
     # The SDK throws an exception if a Connect endpoint responds with anything besides 200 (success).
     # This block catches any exceptions that occur from the request.
@@ -41,6 +44,10 @@ class OrdersController < ApplicationController
   private
 
   def user_params
-    
+    params.require(:user).permit(:first_name, :last_name, :email)
+  end
+
+  def order_params
+    params.require(:order).permit(:street_address, :street_address_2, :city, :state, :zipcode, :country, :phone_number)
   end
 end

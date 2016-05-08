@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   validates_presence_of :order_number, :street_address, :city, :state, :zipcode, :country, :phone_number, :user_id
 
   def charge_payment
-    
+    PaymentWorker.perform_later()
   end
 
   private
