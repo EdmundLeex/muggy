@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
     order = user.orders.new(order_params)
     if order.save
-      order.charge(params[:nounce])
+      order.charge_payment(params[:nounce])
     else
     end
     
