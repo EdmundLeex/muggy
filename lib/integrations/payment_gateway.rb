@@ -17,6 +17,7 @@ class PaymentGateway
   attr_reader :payload, :status, :errors
 
   def initialize(card_nounce, amount, currency)
+    @retry = 0
     @status = NEW
     @payload = {
       card_nonce: card_nounce,
@@ -46,6 +47,10 @@ class PaymentGateway
     # }
     # ReceiptMailer.charge_email(params[:email],data).deliver_now if Rails.env == "development"
   rescue SquareConnect::ApiError => e
+    # TODO: should only retry when timeout
+    retry if @retry < 3
+    @retry += 1
+
     self.status = FAILED
     Rollbar.error('Error encountered while charging card', error: e)
     
