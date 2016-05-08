@@ -39,6 +39,8 @@ gem 'square_connect'
 gem 'figaro'
 gem 'rollbar'
 
+gem 'redis', '~>3.2'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
