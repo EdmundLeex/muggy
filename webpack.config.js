@@ -2,7 +2,7 @@ module.exports = {
   context: __dirname,
   entry: "./frontend/reactapp.jsx",
   output: {
-    path: "./js",
+    path: "./app/assets/javascripts",
     publicPath: "/js/",
     filename: "bundle.js",
     devtoolModuleFilenameTemplate: '[resourcePath]',
