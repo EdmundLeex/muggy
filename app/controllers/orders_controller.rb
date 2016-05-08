@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
 
     order = user.orders.new(order_params)
     if order.save
+      order.charge(params[:nounce])
     else
     end
     

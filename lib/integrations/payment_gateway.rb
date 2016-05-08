@@ -8,7 +8,7 @@ class PaymentGateway
   LocationApi = SquareConnect::LocationApi.new()
   Locations = LocationApi.list_locations(ENV['square_access_token'])
 
-  def self.charge(card_nounce, amount, currency = 'USD')
+  def self.charge(card_nounce, amount, currency)
     payment = self.new(card_nounce, amount, currency)
     payment.charge_payment!
     payment

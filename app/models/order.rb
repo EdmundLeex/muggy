@@ -17,6 +17,7 @@
 #
 
 class Order < ActiveRecord::Base
+  has_many :order_items
   belongs_to :user
 
   before_validation :generate_order_number
@@ -24,8 +25,8 @@ class Order < ActiveRecord::Base
 
   validates_presence_of :order_number, :street_address, :city, :state, :zipcode, :country, :phone_number, :user_id
 
-  def charge_payment
-    PaymentWorker.perform_later()
+  def charge_payment(card_nounce)
+    PaymentWorker.perform_later(card_nounce, amount, currency)
   end
 
   private
