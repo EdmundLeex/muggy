@@ -23,9 +23,9 @@ class OrdersController < ApplicationController
     }
 
     # send receipt email to user
-    ReceiptMailer.charge_email(params[:email],data).deliver_now if Rails.env == "development"
+    OrderMailer.order_confirmation_email(params[:email], data).deliver_now if Rails.env == "development"
     
-    render json: {:status => 200}
+    render json: { status: 200 }
   end
 
   private
