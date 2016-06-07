@@ -14,6 +14,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  user_id          :integer          not null
+#  amount           :integer          not null
 #
 
 class Order < ActiveRecord::Base
