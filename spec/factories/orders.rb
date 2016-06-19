@@ -15,6 +15,8 @@
 #  updated_at       :datetime         not null
 #  user_id          :integer          not null
 #  amount           :integer          not null
+#  first_name       :string           not null
+#  last_name        :string           not null
 #
 
 FactoryGirl.define do
