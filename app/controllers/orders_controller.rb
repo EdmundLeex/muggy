@@ -5,11 +5,11 @@ class OrdersController < ApplicationController
 
     order = user.orders.new(order_params)
     if order.save
-      
+      render json: { status: 200 }
     else
+      errors = order.errors.full_messages
+      render json: { status: 400, errors: errors }
     end
-    
-    render json: { status: 200 }
   end
 
   private
