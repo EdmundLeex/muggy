@@ -5,25 +5,9 @@ class OrdersController < ApplicationController
 
     order = user.orders.new(order_params)
     if order.save
-      order.charge_payment(params[:nounce])
+      
     else
     end
-    
-    data = {
-      amount: amount, 
-      user: {
-        name: params[:name], 
-        street_address_1: params[:street_address_1], 
-        street_address_2: params[:street_address_2], 
-        state: params[:state],
-        zip: params[:zip],
-        city: params[:city]  
-      },
-      card: resp.transaction.tenders[0].card_details.card
-    }
-
-    # send receipt email to user
-    OrderMailer.order_confirmation_email(params[:email], data).deliver_now if Rails.env == "development"
     
     render json: { status: 200 }
   end
